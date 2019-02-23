@@ -13,4 +13,18 @@ class EnigmaTest < Minitest::Test
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
+
+  def test_it_has_attributes
+    expected = ("a".."z").to_a << " "
+    assert_equal expected, @enigma.alphabet
+  end
+
+  def test_random_numbers
+    assert_equal 5, @enigma.random_numbers.length
+  end
+
+  # def test_keys
+  #   assert_equal 3, @enigma.keys
+  # end
+
 end
