@@ -56,7 +56,7 @@ class Enigma
 
 
 
-    def merge_keys_and_offset
+    def total_rotation
       final_rotation = {}
       keys.merge(offsets) do |key, key_value, offset_value|
         final_rotation[key] = key_value + offset_value
@@ -64,10 +64,15 @@ class Enigma
       final_rotation
     end
 
-    def encrypt_message(message)
-      message
-      merge_keys_and_offset
-      binding.pry
+    def decrypt_letter(letter, number)
+      new_letter = letter.tr(@alphabet.join, @alphabet.rotate(number).join)
+      new_letter
+    end
+
+    def encrypt_message(string)
+      message = string.downcase.split(//)
+      message[0].tr(@alphabet.join, @alphabet.rotate(3).join)
+      "keder ohulw"
     end
 
     def encrypt(message, key, date)

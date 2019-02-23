@@ -46,14 +46,18 @@ class EnigmaTest < Minitest::Test
     assert_equal Hash, @enigma.offsets.class
   end
 
-  def test_merge_keys_and_offset
+  def test_total_rotation
     @enigma.random_numbers
-    assert_equal Hash, @enigma.merge_keys_and_offset.class
+    assert_equal Hash, @enigma.total_rotation.class
+  end
+
+  def test_decrypt_letter
+    assert_equal "k", @enigma.decrypt_letter("h", 3)
   end
 
   def test_encrypt_message
     @enigma.random_numbers
-    @enigma.merge_keys_and_offset
+    @enigma.total_rotation
     assert_equal "keder ohulw", @enigma.encrypt_message("hello world")
   end
 
