@@ -23,8 +23,32 @@ class EnigmaTest < Minitest::Test
     assert_equal 5, @enigma.random_numbers.length
   end
 
-  # def test_keys
-  #   assert_equal 3, @enigma.keys
-  # end
+  def test_key_helper
+    @enigma.random_numbers
+
+    assert_equal Hash, @enigma.key_helper.class
+  end
+
+  def test_keys
+    @enigma.random_numbers
+    assert_equal Hash, @enigma.keys.class
+  end
+
+  def test_date
+    assert_equal 40895, @enigma.date
+  end
+
+  def test_offset_helper
+    assert_equal Array, @enigma.offset_helper.class
+  end
+
+  def test_offsets
+    assert_equal Hash, @enigma.offsets.class
+  end
+
+  def test_merge_keys_and_offset
+    @enigma.random_numbers
+    assert_equal Hash, @enigma.merge_keys_and_offset.class
+  end
 
 end
