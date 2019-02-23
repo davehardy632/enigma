@@ -51,6 +51,12 @@ class EnigmaTest < Minitest::Test
     assert_equal Hash, @enigma.merge_keys_and_offset.class
   end
 
+  def test_encrypt_message
+    @enigma.random_numbers
+    @enigma.merge_keys_and_offset
+    assert_equal "keder ohulw", @enigma.encrypt_message("hello world")
+  end
+
   def test_encrypt
     expected = {
                 encryption: "keder ohulw",

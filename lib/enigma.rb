@@ -64,6 +64,12 @@ class Enigma
       final_rotation
     end
 
+    def encrypt_message(message)
+      message
+      merge_keys_and_offset
+      binding.pry
+    end
+
     def encrypt(message, key, date)
       {
                   encryption: "keder ohulw",
@@ -73,10 +79,3 @@ class Enigma
     end
 
 end
-# encrypt(message, key, date)
-#=>
-#   {
-#     encryption: "keder ohulw",
-#     key: "02715",
-#     date: "040895"
-#   }
