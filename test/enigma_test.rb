@@ -23,8 +23,15 @@ class EnigmaTest < Minitest::Test
     assert_equal 5, @enigma.random_numbers.length
   end
 
-  # def test_keys
-  #   assert_equal 3, @enigma.keys
-  # end
+  def test_key_helper
+    @enigma.random_numbers
+
+    assert_equal Hash, @enigma.key_helper.class
+  end
+
+  def test_keys
+    @enigma.random_numbers
+    assert_equal Hash, @enigma.keys.class
+  end
 
 end

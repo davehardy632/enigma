@@ -4,18 +4,36 @@ class Enigma
   attr_reader :alphabet
   def initialize
     @alphabet = ("a".."z").to_a << " "
+    @numbers = nil
   end
 
   def random_numbers
-    numbers = rand(99999)
-    numbers.to_s.split(//)
+    numbers = rand(10000..99999)
+    @numbers = numbers.to_s.split(//)
   end
 
-  # def keys
-  #   letter_keys = Hash.new {|hash, key| hash[key] = []}
-  #   letter_keys["A"] = random_numbers[0]
-  #   end
-end
+  def key_helper
+    letter_keys = Hash.new(0)
+    @numbers
+    letter_keys["A"] = @numbers[0..1]
+    letter_keys["B"] = @numbers[1..2]
+    letter_keys["C"] = @numbers[2..3]
+    letter_keys["D"] = @numbers[3..4]
+    letter_keys
+    end
+
+    def keys
+      keys = {}
+      key_helper.each do |key, value|
+        keys[key] = value.join.to_i
+      end
+      keys
+    end
+  end
+
+
+
+
 
 
   # The Keys
