@@ -62,19 +62,17 @@ class Enigma
         final_rotation[key] = key_value + offset_value
       end
       final_rotation
-      binding.pry
+    end
+
+    def encrypt(message, key, date)
+
     end
 
 end
-
-
-
-
-
-  # The Keys
-  # The keys are created by generating a random five digit number, like 02715, and splitting it up like so:
-  #
-  # A key: first two digits (02)
-  # B key: second and third digits (27)
-  # C key: third and fourth digits (71)
-  # D key: fourth and fifth digits (15)
+encrypt(message, key, date)
+#=>
+#   {
+#     encryption: "keder ohulw",
+#     key: "02715",
+#     date: "040895"
+#   }
