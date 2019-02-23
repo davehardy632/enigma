@@ -34,4 +34,16 @@ class EnigmaTest < Minitest::Test
     assert_equal Hash, @enigma.keys.class
   end
 
+  def test_date
+    assert_equal 40895, @enigma.date
+  end
+
+  def test_offset_helper
+    assert_equal Array, @enigma.offset_helper.class
+  end
+
+  def test_offset_organizer
+    assert_equal Hash, @enigma.offset_organizer.class
+  end
+
 end
