@@ -42,8 +42,13 @@ class EnigmaTest < Minitest::Test
     assert_equal Array, @enigma.offset_helper.class
   end
 
-  def test_offset_organizer
-    assert_equal Hash, @enigma.offset_organizer.class
+  def test_offsets
+    assert_equal Hash, @enigma.offsets.class
+  end
+
+  def test_merge_keys_and_offset
+    @enigma.random_numbers
+    assert_equal Hash, @enigma.merge_keys_and_offset.class
   end
 
 end
