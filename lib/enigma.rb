@@ -28,7 +28,6 @@ class Enigma
 
   def random
     random_number_generator
-    binding.pry
   end
 
 
