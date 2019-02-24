@@ -18,10 +18,6 @@ class EnigmaTest < Minitest::Test
     assert_equal 5, @enigma.random_number_generator.length
   end
 
-  def test_random
-    assert_equal 12, @enigma.random
-  end
-
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
@@ -29,16 +25,6 @@ class EnigmaTest < Minitest::Test
   def test_it_has_attributes
     expected = ("a".."z").to_a << " "
     assert_equal expected, @enigma.alphabet
-  end
-
-  def test_random_numbers #default
-    assert_equal 5, @enigma.random_numbers.length
-  end
-
-  def test_key_helper #default
-    @enigma.random_numbers
-
-    assert_equal Hash, @enigma.key_helper.class
   end
 
   def test_manual_key_helper # manual entry
@@ -72,14 +58,14 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decrypt_letter
-    assert_equal "k", @enigma.decrypt_letter("h", 3)
+    assert_equal 1, @enigma.decrypt_letter("h", 3).length
   end
 
   def test_manally_decrypt_message
     assert_equal "hello world", @enigma.manually_decrypt_message("keder ohulw", "02715", "040895")
   end
 
-  def test_encrypt
+  def test_encrypt # good
     expected = {
          encryption: "keder ohulw",
          key: "02715",
@@ -97,36 +83,34 @@ class EnigmaTest < Minitest::Test
         assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
-  def test_keys #default
-    @enigma.random_numbers
-    assert_equal Hash, @enigma.keys.class
+  def test_encrypt_with_date_as_default
+    expected = {
+         encryption: "kjharesduq ",
+         key: "02715",
+         date: "022419"
+       }
+
+    assert_equal expected, @enigma.encrypt("hello world", "02715")
   end
 
-  def test_random_date # default
-    assert_equal 40895, @enigma.random_date
+  def test_decrypt_with_date_as_default
+    @encrypted = @enigma.encrypt("hello world", "02715")
+    expected = {
+          decryption: "hello world",
+          key: "02715",
+          date: "022419"
+        }
+    assert_equal expected, @enigma.decrypt(@encrypted[:encryption], "02715")
   end
 
-  def test_offset_helper #default
-    assert_equal Array, @enigma.offset_helper.class
+  def test_encrypt_with_default_date_and_key
+    expected = {
+         encryption: "kjharesduq ",
+         key: "02715",
+         date: "022419"
+       }
+      assert_equal Hash, @enigma.encrypt("hello world").class
   end
 
-  def test_offsets #default
-    assert_equal Hash, @enigma.offsets.class
-  end
-
-  def test_total_rotation #default
-    @enigma.random_numbers
-    assert_equal Hash, @enigma.total_rotation.class
-  end
-
-  def test_encrypt_letter #default
-    assert_equal "k", @enigma.encrypt_letter("h", 3)
-  end
-
-  def test_encrypt_message #default
-    @enigma.random_numbers
-    @enigma.total_rotation
-    assert_equal "keder ohulw", @enigma.encrypt_message("hello world")
-  end
 
 end
