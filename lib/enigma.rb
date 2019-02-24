@@ -6,7 +6,6 @@ class Enigma
   def initialize
     @alphabet = ("a".."z").to_a << " "
     @numbers = nil
-    # @input_numbers = nil
   end
 
   def date_generator
@@ -25,11 +24,6 @@ class Enigma
       return string
     end
   end
-
-  def random
-    random_number_generator
-  end
-
 
   def random_numbers #used for default
     numbers = rand(10000..99999)
@@ -149,7 +143,7 @@ class Enigma
     new.join
   end
 
-  def encrypt(message, key, date)
+  def encrypt(message, key = random_number_generator , date = date_generator)
     {
       encryption: manually_encrypt_message(message, key, date),
       key: key,
@@ -157,13 +151,18 @@ class Enigma
     }
   end
 
-  def decrypt(message, key, date)
+  def decrypt(message, key, date = date_generator)
      {
        decryption: manually_decrypt_message(message, key, date),
        key: key,
        date: date
      }
   end
+
+  # encrypt a message with a key (uses today's date)
+# pry(main)> encrypted = enigma.encrypt("hello world", "02715")
+#=> # encryption hash here
+
 
   # def
   #
