@@ -10,6 +10,14 @@ class EnigmaTest < Minitest::Test
     @enigma = Enigma.new
   end
 
+  def test_date_generator_returns_todays_date
+    assert_equal "022419", @enigma.date_generator
+  end
+
+  def test_random_number_generator
+    assert_equal String, @enigma.random_number_generator
+  end
+
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end

@@ -9,6 +9,16 @@ class Enigma
     # @input_numbers = nil
   end
 
+  def date_generator
+    date = Date.today
+    string = date.strftime("%m%d%y")
+  end
+
+  def random_number_generator
+    @random_numbers = rand(9999..99999)
+    binding.pry
+  end
+
   def random_numbers #used for default
     numbers = rand(10000..99999)
     @numbers = numbers.to_s.split(//)
@@ -125,7 +135,6 @@ class Enigma
       end
     end
     new.join
-    binding.pry
   end
 
   def encrypt(message, key, date)
@@ -138,11 +147,21 @@ class Enigma
 
   def decrypt(message, key, date)
      {
-       decryption: "hello world",
-       key: "02715",
-       date: "040895"
+       decryption: manually_decrypt_message(message, key, date),
+       key: key,
+       date: date
      }
   end
+
+  # def
+  #
+  #   encrypted = enigma.encrypt("hello world", "02715")
+  # #=> # encryption hash here
+  #
+  # #decrypt a message with a key (uses today's date)
+  #  enigma.decrypt(encrypted[:encryption], "02715")
+  # #=> # decryption hash here
+
 
   def keys #default
     keys = {}
@@ -155,6 +174,7 @@ class Enigma
   def random_date #manual
     40895
   end
+
 
   def offset_helper #default
     organize = []
