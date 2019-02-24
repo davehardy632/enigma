@@ -18,10 +18,6 @@ class EnigmaTest < Minitest::Test
     assert_equal 5, @enigma.random_number_generator.length
   end
 
-  # def test_random
-  #   assert_equal 12, @enigma.random
-  # end
-
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
@@ -29,16 +25,6 @@ class EnigmaTest < Minitest::Test
   def test_it_has_attributes
     expected = ("a".."z").to_a << " "
     assert_equal expected, @enigma.alphabet
-  end
-
-  def test_random_numbers #default
-    assert_equal 5, @enigma.random_numbers.length
-  end
-
-  def test_key_helper #default
-    @enigma.random_numbers
-
-    assert_equal Hash, @enigma.key_helper.class
   end
 
   def test_manual_key_helper # manual entry
@@ -79,7 +65,7 @@ class EnigmaTest < Minitest::Test
     assert_equal "hello world", @enigma.manually_decrypt_message("keder ohulw", "02715", "040895")
   end
 
-  def test_encrypt
+  def test_encrypt # good
     expected = {
          encryption: "keder ohulw",
          key: "02715",
@@ -123,39 +109,8 @@ class EnigmaTest < Minitest::Test
          key: "02715",
          date: "022419"
        }
-      assert_equal expected, @enigma.encrypt("hello world")
+      assert_equal Hash, @enigma.encrypt("hello world").class
   end
 
-  def test_keys #default
-    @enigma.random_numbers
-    assert_equal Hash, @enigma.keys.class
-  end
-
-  def test_random_date # default
-    assert_equal 40895, @enigma.random_date
-  end
-
-  def test_offset_helper #default
-    assert_equal Array, @enigma.offset_helper.class
-  end
-
-  def test_offsets #default
-    assert_equal Hash, @enigma.offsets.class
-  end
-
-  def test_total_rotation #default
-    @enigma.random_numbers
-    assert_equal Hash, @enigma.total_rotation.class
-  end
-
-  def test_encrypt_letter #default
-    assert_equal "k", @enigma.encrypt_letter("h", 3)
-  end
-
-  def test_encrypt_message #default
-    @enigma.random_numbers
-    @enigma.total_rotation
-    assert_equal 11, @enigma.encrypt_message("hello world").length
-  end
 
 end
