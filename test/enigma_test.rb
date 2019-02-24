@@ -52,7 +52,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt_letter
-    assert_equal "k", @enigma.encrypt_letter("h", 68)
+    assert_equal "k", @enigma.encrypt_letter("h", 3)
   end
 
   def test_encrypt_message

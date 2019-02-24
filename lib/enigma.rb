@@ -71,11 +71,23 @@ class Enigma
 
     def encrypt_message(string)
       message = string.downcase.split(//)
-      encrypted_message = message.map do |letter|
-      encrypt_letter(letter, total_rotation["A"])
+      new = []
+      message.each_with_index do |letter, index|
+          if index == 0 || index % 4 == 0
+        new << encrypt_letter(letter, total_rotation["A"])
+      elsif index == 1 || index % 4 == 1
+        new << encrypt_letter(letter, total_rotation["B"])
+      elsif index == 2 || index % 4 == 2
+        new << encrypt_letter(letter, total_rotation["C"])
+      elsif index == 3 || index % 4 == 3
+        new << encrypt_letter(letter, total_rotation["D"])
+        end
       end
-      encrypted_message
+      new
     end
+
+
+
 
     def encrypt(message, key, date)
       {
