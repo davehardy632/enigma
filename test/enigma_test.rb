@@ -51,8 +51,8 @@ class EnigmaTest < Minitest::Test
     assert_equal Hash, @enigma.total_rotation.class
   end
 
-  def test_decrypt_letter
-    assert_equal "k", @enigma.decrypt_letter("h", 3)
+  def test_encrypt_letter
+    assert_equal "k", @enigma.encrypt_letter("h", 68)
   end
 
   def test_encrypt_message

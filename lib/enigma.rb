@@ -64,15 +64,17 @@ class Enigma
       final_rotation
     end
 
-    def decrypt_letter(letter, number)
+    def encrypt_letter(letter, number)
       new_letter = letter.tr(@alphabet.join, @alphabet.rotate(number).join)
       new_letter
     end
 
     def encrypt_message(string)
       message = string.downcase.split(//)
-      message[0].tr(@alphabet.join, @alphabet.rotate(3).join)
-      "keder ohulw"
+      encrypted_message = message.map do |letter|
+      encrypt_letter(letter, total_rotation["A"])
+      end
+      encrypted_message
     end
 
     def encrypt(message, key, date)
