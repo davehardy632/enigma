@@ -66,7 +66,7 @@ class Enigma
       offset_to_int #potential naming issue
   end
 
-  def manual_total_rotation(key, date) #default
+  def manual_total_rotation(key, date) #default used in final encrypt method
     final_rotation = {}
     keys = manual_keys(key)
     offsets = manual_offsets(date)
@@ -74,6 +74,29 @@ class Enigma
       final_rotation[key] = key_value + offset_value
     end
     final_rotation
+  end
+
+  def encrypt_letter(letter, number) # not needed in final method #default
+    new_letter = letter.tr(@alphabet.join, @alphabet.rotate(number).join)
+    new_letter
+  end
+
+  def manually_encrypt_message(message, key, date)
+    split_message = message.downcase.split(//)
+    new = []
+    total_rotation = manual_total_rotation(key, date)
+    split_message.each_with_index do |letter, index|
+        if index == 0 || index % 4 == 0
+      new << encrypt_letter(letter, total_rotation["A"])
+    elsif index == 1 || index % 4 == 1
+      new << encrypt_letter(letter, total_rotation["B"])
+    elsif index == 2 || index % 4 == 2
+      new << encrypt_letter(letter, total_rotation["C"])
+    elsif index == 3 || index % 4 == 3
+      new << encrypt_letter(letter, total_rotation["D"])
+      end
+    end
+    new.join
     binding.pry
   end
 
@@ -141,7 +164,34 @@ class Enigma
       new.join
     end
 
-    # def encrypt(message, key, date)
-    # manual_key_helper(numbers)
-    # end
+    def manually_encrypt_message(message, key, date)
+      split_message = message.downcase.split(//)
+      new = []
+      total_rotation = manual_total_rotation(key, date)
+      split_message.each_with_index do |letter, index|
+          if index == 0 || index % 4 == 0
+        new << encrypt_letter(letter, total_rotation["A"])
+      elsif index == 1 || index % 4 == 1
+        new << encrypt_letter(letter, total_rotation["B"])
+      elsif index == 2 || index % 4 == 2
+        new << encrypt_letter(letter, total_rotation["C"])
+      elsif index == 3 || index % 4 == 3
+        new << encrypt_letter(letter, total_rotation["D"])
+        end
+      end
+      new.join
+      binding.pry
+    end
+
+    def encrypt(message, key, date)
+    manually_encrypt_message
+    end
 end
+
+enigma.encrypt("hello world", "02715", "040895")
+#=>
+#   {
+#     encryption: "keder ohulw",
+#     key: "02715",
+#     date: "040895"
+#   }

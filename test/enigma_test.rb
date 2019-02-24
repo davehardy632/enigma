@@ -38,15 +38,34 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_manual_offset_helper #manual
-    assert_equal Array, @enigma.manual_offset_helper("040895")
+    expected = ["1", "6", "7", "2", "4", "0", "1", "0", "2", "5"]
+
+    assert_equal expected, @enigma.manual_offset_helper("040895")
   end
 
   def test_manual_offsets
-    assert_equal Hash, @enigma.manual_offsets("040895")
+    expected = {"A"=>1, "B"=>0, "C"=>2, "D"=>5}
+
+    assert_equal expected, @enigma.manual_offsets("040895")
   end
 
   def test_manual_total_rotation
-    assert_equal Hash, @enigma.manual_total_rotation("02715","040895")
+    expected = {"A"=>3, "B"=>27, "C"=>73, "D"=>20}
+
+    assert_equal expected, @enigma.manual_total_rotation("02715","040895")
+  end
+
+  def test_manually_encrypt_message #manual
+    assert_equal "keder ohulw", @enigma.manually_encrypt_message("hello world", "02715", "040895")
+  end
+
+  def test_encrypt
+    expected = {
+         encryption: "keder ohulw",
+         key: "02715",
+         date: "040895"
+       }
+       assert_equal expected, @enigma.encrypt
   end
 
   def test_keys #default
@@ -80,16 +99,5 @@ class EnigmaTest < Minitest::Test
     @enigma.total_rotation
     assert_equal "keder ohulw", @enigma.encrypt_message("hello world")
   end
-
-  # def test_encrypt
-  #   @enigma.random_numbers
-  #   @enigma.total_rotation
-  #   expected = {
-  #               encryption: "keder ohulw",
-  #               key: "02715",
-  #               date: "040895"
-  #             }
-  #   assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
-  # end
 
 end
