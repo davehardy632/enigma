@@ -9,14 +9,14 @@ class Enigma
     # @input_numbers = nil
   end
 
-  def random_numbers
+  def random_numbers #used for default
     numbers = rand(10000..99999)
     @numbers = numbers.to_s.split(//)
     new_numbers = rand(10000..99999)
     new_numbers = new_numbers.to_s.split(//)
   end
 
-  def key_helper
+  def key_helper #default
     letter_keys = Hash.new(0)
     @numbers
     letter_keys["A"] = @numbers[0..1]
@@ -24,43 +24,94 @@ class Enigma
     letter_keys["C"] = @numbers[2..3]
     letter_keys["D"] = @numbers[3..4]
     letter_keys
-    end
+  end
 
-    def keys
-      keys = {}
-      key_helper.each do |key, value|
-        keys[key] = value.join.to_i
-      end
-      keys
-    end
+  def manual_key_helper(string) #manual entry
+    letter_keys = Hash.new(0)
+    string
+    letter_keys["A"] = string[0..1]
+    letter_keys["B"] = string[1..2]
+    letter_keys["C"] = string[2..3]
+    letter_keys["D"] = string[3..4]
+    letter_keys
+  end
 
-    def date
-      40895
+  def manual_keys(string) #manual entry
+    keys = {}
+    key_strings = manual_key_helper(string)
+    key_strings.each do |key, value|
+      keys[key] = value.to_i
     end
+    keys
+  end
 
-    def offset_helper
+  def manual_offset_helper(date) #manual
     organize = []
-    offset_key = date * date
+    offset_key = date.to_i * date.to_i
     organize << offset_key.to_s.split(//)
     organize.flatten
-    end
+  end
 
-    def offsets # final offset values in a hash
+  def manual_offsets(date) # final offset values in a hash
+      values = manual_offset_helper(date)
       offset_keys = {}
       offset_to_int = {}
-      offset_keys["A"] =   offset_helper[-4]
-      offset_keys["B"] =   offset_helper[-3]
-      offset_keys["C"] =   offset_helper[-2]
-      offset_keys["D"] =   offset_helper[-1]
+      offset_keys["A"] = values[-4]
+      offset_keys["B"] = values[-3]
+      offset_keys["C"] = values[-2]
+      offset_keys["D"] = values[-1]
       offset_keys.each do |key, value|
         offset_to_int[key] = value.to_i
-      end
-      offset_to_int
     end
+      offset_to_int #potential naming issue
+  end
+
+  def manual_total_rotation(key, date) #default
+    final_rotation = {}
+    keys = manual_keys(key)
+    offsets = manual_offsets(date)
+    keys.merge(offsets) do |key, key_value, offset_value|
+      final_rotation[key] = key_value + offset_value
+    end
+    final_rotation
+    binding.pry
+  end
+
+  def keys #default
+    keys = {}
+    key_helper.each do |key, value|
+    keys[key] = value.join.to_i
+    end
+    keys
+  end
+
+  def random_date #manual
+    40895
+  end
+
+  def offset_helper #default
+    organize = []
+    offset_key = random_date * random_date
+    organize << offset_key.to_s.split(//)
+    organize.flatten
+  end
+
+  def offsets # final offset values in a hash
+      offset_keys = {}
+      offset_to_int = {}
+      offset_keys["A"] = offset_helper[-4]
+      offset_keys["B"] = offset_helper[-3]
+      offset_keys["C"] = offset_helper[-2]
+      offset_keys["D"] = offset_helper[-1]
+      offset_keys.each do |key, value|
+        offset_to_int[key] = value.to_i
+    end
+      offset_to_int
+  end
 
 
 
-    def total_rotation
+    def total_rotation #default
       final_rotation = {}
       keys.merge(offsets) do |key, key_value, offset_value|
         final_rotation[key] = key_value + offset_value
@@ -68,12 +119,12 @@ class Enigma
       final_rotation
     end
 
-    def encrypt_letter(letter, number) # not needed in final method
+    def encrypt_letter(letter, number) # not needed in final method #default
       new_letter = letter.tr(@alphabet.join, @alphabet.rotate(number).join)
       new_letter
     end
 
-    def encrypt_message(string)
+    def encrypt_message(string) #default
       message = string.downcase.split(//)
       new = []
       message.each_with_index do |letter, index|
@@ -90,10 +141,7 @@ class Enigma
       new.join
     end
 
-    # def encrypt(message, key = , date)
-    #   encryption_info = {}
-    #   encryption_info[encryption:] =  encrypt_message(message)
-    #   encryption_info[key:] = key
-    #   encryption_info[date:] = date
+    # def encrypt(message, key, date)
+    # manual_key_helper(numbers)
     # end
 end
