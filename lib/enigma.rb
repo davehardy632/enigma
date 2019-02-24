@@ -1,15 +1,19 @@
 require 'pry'
+require 'date'
 
 class Enigma
   attr_reader :alphabet
   def initialize
     @alphabet = ("a".."z").to_a << " "
     @numbers = nil
+    # @input_numbers = nil
   end
 
   def random_numbers
     numbers = rand(10000..99999)
     @numbers = numbers.to_s.split(//)
+    new_numbers = rand(10000..99999)
+    new_numbers = new_numbers.to_s.split(//)
   end
 
   def key_helper
@@ -41,7 +45,7 @@ class Enigma
     organize.flatten
     end
 
-    def offsets
+    def offsets # final offset values in a hash
       offset_keys = {}
       offset_to_int = {}
       offset_keys["A"] =   offset_helper[-4]
@@ -64,7 +68,7 @@ class Enigma
       final_rotation
     end
 
-    def encrypt_letter(letter, number)
+    def encrypt_letter(letter, number) # not needed in final method
       new_letter = letter.tr(@alphabet.join, @alphabet.rotate(number).join)
       new_letter
     end
@@ -83,18 +87,13 @@ class Enigma
         new << encrypt_letter(letter, total_rotation["D"])
         end
       end
-      new
+      new.join
     end
 
-
-
-
-    def encrypt(message, key, date)
-      {
-                  encryption: "keder ohulw",
-                  key: "02715",
-                  date: "040895"
-                }
-    end
-
+    # def encrypt(message, key = , date)
+    #   encryption_info = {}
+    #   encryption_info[encryption:] =  encrypt_message(message)
+    #   encryption_info[key:] = key
+    #   encryption_info[date:] = date
+    # end
 end
