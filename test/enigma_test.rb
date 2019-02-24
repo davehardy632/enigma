@@ -15,7 +15,11 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_random_number_generator
-    assert_equal String, @enigma.random_number_generator
+    assert_equal 5, @enigma.random_number_generator.length
+  end
+
+  def test_random
+    assert_equal 12, @enigma.random
   end
 
   def test_it_exists

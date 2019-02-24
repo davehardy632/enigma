@@ -15,9 +15,22 @@ class Enigma
   end
 
   def random_number_generator
-    @random_numbers = rand(9999..99999)
+    random_num = rand(100..9999)
+    string = random_num.to_s
+      if string.length == 4
+      return "0" + string
+    elsif string.length == 3
+      return "00" + string
+    elsif string.length == 5
+      return string
+    end
+  end
+
+  def random
+    random_number_generator
     binding.pry
   end
+
 
   def random_numbers #used for default
     numbers = rand(10000..99999)
