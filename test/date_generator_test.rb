@@ -17,6 +17,12 @@ class DateGeneratorTest < Minitest::Test
     assert_equal expected, @enigma.offset_helper("040895")
   end
 
+  def test_offsets_to_string
+    expected = {"A"=>"1", "B"=>"0", "C"=>"2", "D"=>"5"}
+
+    assert_equal expected, @enigma.offsets_to_string("040895")
+  end
+
   def test_offsets
     expected = {"A"=>1, "B"=>0, "C"=>2, "D"=>5}
 

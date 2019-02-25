@@ -11,12 +11,22 @@ class RandomNumberGeneratorTest < Minitest::Test
     assert_equal 5, @enigma.random_number_generator.length
   end
 
-  def test_key_helper # manual entry
-    assert_equal Hash, @enigma.key_helper("02715").class
+  def test_key_helper # manual
+    expected = {"A"=>"02",
+                "B"=>"27",
+                "C"=>"71",
+                "D"=>"15"}
+
+    assert_equal expected, @enigma.key_helper("02715")
   end
 
-  def test_keys #manual entry
-    assert_equal Hash, @enigma.keys("02715").class
+  def test_keys
+    expected = {"A"=>2,
+                "B"=>27,
+                "C"=>71,
+                "D"=>15}
+
+    assert_equal expected, @enigma.keys("02715")
   end
 
 end
