@@ -1,50 +1,12 @@
 require 'date'
 module EnigmaHelperMethods
-  
-  def manual_key_helper(string) #manual entry
-    letter_keys = Hash.new(0)
-    string
-    letter_keys["A"] = string[0..1]
-    letter_keys["B"] = string[1..2]
-    letter_keys["C"] = string[2..3]
-    letter_keys["D"] = string[3..4]
-    letter_keys
-  end
 
-  def manual_keys(string) #manual entry
-    keys = {}
-    key_strings = manual_key_helper(string)
-    key_strings.each do |key, value|
-      keys[key] = value.to_i
-    end
-    keys
-  end
 
-  def manual_offset_helper(date) #manual
-    organize = []
-    offset_key = date.to_i * date.to_i
-    organize << offset_key.to_s.split(//)
-    organize.flatten
-  end
 
-  def manual_offsets(date) # final offset values in a hash
-      values = manual_offset_helper(date)
-      offset_keys = {}
-      offset_to_int = {}
-      offset_keys["A"] = values[-4]
-      offset_keys["B"] = values[-3]
-      offset_keys["C"] = values[-2]
-      offset_keys["D"] = values[-1]
-      offset_keys.each do |key, value|
-        offset_to_int[key] = value.to_i
-    end
-      offset_to_int #potential naming issue
-  end
-
-  def manual_total_rotation(key, date) #default used in final encrypt method
+  def total_rotation(key, date) #default used in final encrypt method
     final_rotation = {}
-    keys = manual_keys(key)
-    offsets = manual_offsets(date)
+    keys = keys(key)
+    offsets = offsets(date)
     keys.merge(offsets) do |key, key_value, offset_value|
       final_rotation[key] = key_value + offset_value
     end
@@ -60,10 +22,10 @@ module EnigmaHelperMethods
   letter = letter.tr(@alphabet.rotate(number).join ,@alphabet.join)
   end
 
-  def manually_encrypt_message(message, key, date)
+  def encrypt_message(message, key, date)
     split_message = message.downcase.split(//)
     new = []
-    total_rotation = manual_total_rotation(key, date)
+    total_rotation = total_rotation(key, date)
     split_message.each_with_index do |letter, index|
         if index == 0 || index % 4 == 0
       new << encrypt_letter(letter, total_rotation["A"])
@@ -78,10 +40,10 @@ module EnigmaHelperMethods
     new.join
   end
 
-  def manually_decrypt_message(message, key, date)
+  def decrypt_message(message, key, date)
     split_message = message.downcase.split(//)
     new = []
-    total_rotation = manual_total_rotation(key, date)
+    total_rotation = total_rotation(key, date)
     split_message.each_with_index do |letter, index|
         if index == 0 || index % 4 == 0
       new << decrypt_letter(letter, total_rotation["A"])
