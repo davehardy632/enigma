@@ -1,17 +1,13 @@
 module RandomNumberGenerator
+
   def random_number_generator
-    random_num = rand(1000..9999)
-    string = random_num.to_s
-      if string.length == 4
-      return "0" + string
-    else
-      return string
-    end
+    random_num = rand(100..99999)
+    string = random_num.to_s.rjust(5, "0")
+    string
   end
 
-  def key_helper(string) #manual entry
+  def key_helper(string)
     letter_keys = Hash.new(0)
-    string
     letter_keys["A"] = string[0..1]
     letter_keys["B"] = string[1..2]
     letter_keys["C"] = string[2..3]
@@ -19,12 +15,12 @@ module RandomNumberGenerator
     letter_keys
   end
 
-  def keys(string) #manual entry
-    keys = {}
+  def keys(string)
+    integer_keys = {}
     key_strings = key_helper(string)
     key_strings.each do |key, value|
-      keys[key] = value.to_i
+      integer_keys[key] = value.to_i
     end
-    keys
+    integer_keys
   end
 end
