@@ -17,7 +17,7 @@ class Enigma
 
   def encrypt(message, key = random_number_generator , date = date_generator)
     {
-      encryption: manually_encrypt_message(message, key, date),
+      encryption: encrypt_message(message, key, date),
       key: key,
       date: date
     }
@@ -25,7 +25,7 @@ class Enigma
 
   def decrypt(message, key, date = date_generator)
      {
-       decryption: manually_decrypt_message(message, key, date),
+       decryption: decrypt_message(message, key, date),
        key: key,
        date: date
      }

@@ -38,22 +38,22 @@ class EnigmaTest < Minitest::Test
         assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
-  def test_encrypt_with_date_as_default
+  def test_encrypt_with_date_as_default # look this over
     expected = {
-         encryption: "kjharesduq ",
+         encryption: "ohhavcsdyo ",
          key: "02715",
-         date: "022419"
+         date: "022519"
        }
 
     assert_equal expected, @enigma.encrypt("hello world", "02715")
   end
 
-  def test_decrypt_with_date_as_default
+  def test_decrypt_with_date_as_default #look this over
     @encrypted = @enigma.encrypt("hello world", "02715")
     expected = {
           decryption: "hello world",
           key: "02715",
-          date: "022419"
+          date: "022519"
         }
     assert_equal expected, @enigma.decrypt(@encrypted[:encryption], "02715")
   end
