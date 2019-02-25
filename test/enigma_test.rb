@@ -3,19 +3,12 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'date'
 require './lib/enigma'
+require './lib/random_number_generator'
 
 class EnigmaTest < Minitest::Test
 
   def setup
     @enigma = Enigma.new
-  end
-
-  def test_date_generator_returns_todays_date
-    assert_equal "022419", @enigma.date_generator
-  end
-
-  def test_random_number_generator
-    assert_equal 5, @enigma.random_number_generator.length
   end
 
   def test_it_exists
@@ -58,7 +51,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decrypt_letter
-    assert_equal 1, @enigma.decrypt_letter("h", 3).length
+    assert_equal "e", @enigma.decrypt_letter("h", 3)
   end
 
   def test_manally_decrypt_message
@@ -111,6 +104,5 @@ class EnigmaTest < Minitest::Test
        }
       assert_equal Hash, @enigma.encrypt("hello world").class
   end
-
 
 end

@@ -1,28 +1,13 @@
 require 'pry'
 require 'date'
-
+require './lib/date_generator'
+require './lib/random_number_generator'
 class Enigma
+  include DateGenerator
+  include RandomNumberGenerator
   attr_reader :alphabet
   def initialize
     @alphabet = ("a".."z").to_a << " "
-    @numbers = nil
-  end
-
-  def date_generator
-    date = Date.today
-    string = date.strftime("%m%d%y")
-  end
-
-  def random_number_generator
-    random_num = rand(100..9999)
-    string = random_num.to_s
-      if string.length == 4
-      return "0" + string
-    elsif string.length == 3
-      return "00" + string
-    elsif string.length == 5
-      return string
-    end
   end
 
   def manual_key_helper(string) #manual entry
@@ -81,8 +66,7 @@ class Enigma
   end
 
   def decrypt_letter(letter, number) # not needed in final method #default
-    new_letter = letter.tr(@alphabet.rotate(number).join ,@alphabet.join)
-    new_letter
+  letter = letter.tr(@alphabet.rotate(number).join ,@alphabet.join)
   end
 
   def manually_encrypt_message(message, key, date)
@@ -101,11 +85,6 @@ class Enigma
       end
     end
     new.join
-  end
-
-  def decrypt_letter(letter, number) # not needed in final method #default
-    new_letter = letter.tr(@alphabet.rotate(number).join ,@alphabet.join)
-    new_letter
   end
 
   def manually_decrypt_message(message, key, date)
