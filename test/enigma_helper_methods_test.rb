@@ -8,7 +8,10 @@ class EnigmaHelperMethodsTest < Minitest::Test
   end
 
   def test_total_rotation
-    expected = {"A"=>3, "B"=>27, "C"=>73, "D"=>20}
+    expected = {"A"=>3,
+                "B"=>27,
+                "C"=>73,
+                "D"=>20}
 
     assert_equal expected, @enigma.total_rotation("02715","040895")
   end
