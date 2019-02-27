@@ -21,7 +21,7 @@ incoming_text = handle.read
 
 handle.close
 
-encrypted_text = enigma.encrypt(incoming_text, key )
+encrypted_text = enigma.encrypt(incoming_text)
 
 puts "Created '#{ARGV[1]}' with the key #{encrypted_text[:key]} and date #{encrypted_text[:date]}"
 
