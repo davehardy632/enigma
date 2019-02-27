@@ -2,7 +2,7 @@ module DateGenerator
 
   def date_generator
     date = Date.today
-    string = date.strftime("%m%d%y")
+    @string = date.strftime("%m%d%y")
   end
 
   def offset_helper(date) #manual
@@ -12,7 +12,7 @@ module DateGenerator
     organize.flatten
   end
 
-  def offsets_to_string(date) # final offset values in a hash
+  def offsets_to_string(date)
       values = offset_helper(date)
       offset_keys = {}
       offset_keys["A"] = values[-4]
@@ -31,11 +31,3 @@ module DateGenerator
     integer_value
   end
 end
-
-
-
-      #   offset_keys.each do |key, value|
-      #     offset_to_int[key] = value.to_i
-      # end
-      #   offset_to_int #potential naming issue
-      #   binding.pry
