@@ -8,7 +8,8 @@ class DateGeneratorTest < Minitest::Test
   end
 #change for todays date
   def test_date_generator_returns_todays_date
-    assert_equal "022619", @enigma.date_generator
+    assert_equal 6, @enigma.date_generator.length
+    assert_equal String, @enigma.date_generator.class
   end
 
   def test_offset_helper #manual
