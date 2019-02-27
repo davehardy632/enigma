@@ -17,7 +17,7 @@ module EnigmaHelperMethods
   end
 
   def decrypt_letter(letter, number)
-  letter = letter.tr(@alphabet.rotate(number).join ,@alphabet.join)
+    letter = letter.tr(@alphabet.rotate(number).join ,@alphabet.join)
   end
 
   def encrypt_message(message, key, date)
