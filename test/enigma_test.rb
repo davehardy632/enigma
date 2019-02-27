@@ -38,12 +38,7 @@ class EnigmaTest < Minitest::Test
         assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
-  def test_encrypt_with_date_as_default # look this over
-    # expected = {
-    #      encryption: "sfhazasdbm ",
-    #      key: "02715",
-    #      date: "022619"
-    #    }
+  def test_encrypt_with_date_as_default
 
     assert_equal Hash, @enigma.encrypt("hello world", "02715").class
     assert_equal 3, @enigma.encrypt("hello world", "02715").length
@@ -53,14 +48,14 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decrypt_with_date_as_default
-    #change test to measure todays date
+
     @encrypted = @enigma.encrypt("hello world", "02715")
-    expected = {
-          decryption: "hello world",
-          key: "02715",
-          date: "022619"
-        }
-    assert_equal expected, @enigma.decrypt(@encrypted[:encryption], "02715")
+
+    assert_equal Hash, @enigma.decrypt(@encrypted[:encryption], "02715").class
+    assert_equal 3, @enigma.decrypt(@encrypted[:encryption], "02715").length
+    assert @enigma.decrypt(@encrypted[:encryption], "02715").key?(:decryption)
+    assert @enigma.decrypt(@encrypted[:encryption], "02715").key?(:key)
+    assert @enigma.decrypt(@encrypted[:encryption], "02715").key?(:date)
   end
 
   def test_encrypt_with_default_date_and_key
