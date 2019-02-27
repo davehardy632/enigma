@@ -4,17 +4,6 @@ require './lib/random_number_generator'
 
 enigma = Enigma.new
 
-def date_generator
-  date = Date.today
-  string = date.strftime("%m%d%y")
-end
-
-def random_number_generator
-  random_num = rand(100..99999)
-  string = random_num.to_s.rjust(5, "0")
-  string
-end
-
 handle = File.open(ARGV[0], "r")
 
 incoming_text = handle.read

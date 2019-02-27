@@ -5,7 +5,7 @@ module DateGenerator
     @string = date.strftime("%m%d%y")
   end
 
-  def offset_helper(date) #manual
+  def offset_helper(date)
     organize = []
     offset_key = date.to_i * date.to_i
     organize << offset_key.to_s.split(//)
