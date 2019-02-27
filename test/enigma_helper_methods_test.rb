@@ -16,7 +16,7 @@ class EnigmaHelperMethodsTest < Minitest::Test
     assert_equal expected, @enigma.total_rotation("02715","040895")
   end
 
-  def test_encrypt_message #manual
+  def test_encrypt_message 
     assert_equal "keder ohulw", @enigma.encrypt_message("hello world", "02715", "040895")
   end
 

@@ -6,13 +6,13 @@ class DateGeneratorTest < Minitest::Test
   def setup
     @enigma = Enigma.new
   end
-#change for todays date
+
   def test_date_generator_returns_todays_date
     assert_equal 6, @enigma.date_generator.length
     assert_equal String, @enigma.date_generator.class
   end
 
-  def test_offset_helper #manual
+  def test_offset_helper
     expected = ["1", "6", "7", "2", "4", "0", "1", "0", "2", "5"]
 
     assert_equal expected, @enigma.offset_helper("040895")

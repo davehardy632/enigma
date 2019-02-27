@@ -11,7 +11,7 @@ class RandomNumberGeneratorTest < Minitest::Test
     assert_equal 5, @enigma.random_number_generator.length
   end
 
-  def test_key_helper # manual
+  def test_key_helper
     expected = {"A"=>"02",
                 "B"=>"27",
                 "C"=>"71",
